@@ -29,16 +29,29 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </div>
     </div>
   </header>
-{{ aircrafts }}
   <!-- First Photo Grid-->
   <div class="w3-row-padding">
+      {% for aircraft in aircrafts %}
     <div class="w3-third w3-container w3-margin-bottom">
         <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">투표수: {{ 29 }}</div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/OA-37B-1_%28centered%29.jpg/300px-OA-37B-1_%28centered%29.jpg" alt="House" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-display-topleft w3-black w3-padding">투표수: {{ aircraft.vote }}</div>
+            {% if aircraft.id == 1 %}
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/OA-37B-1_%28centered%29.jpg/300px-OA-37B-1_%28centered%29.jpg" alt="House" style="width:100%" class="w3-hover-opacity">
+            {% elif aircraft.id == 2  %}
+                <img src="http://cfile7.uf.tistory.com/image/996129335A0D35061EECD0" alt="House" style="width:100%" class="w3-hover-opacity">
+            {% elif aircraft.id == 3  %}
+                <img src="http://luxurylivingmag.com/wp-content/uploads/2016/08/photo-1.php_-726x400.jpeg" alt="House" style="width:100%" class="w3-hover-opacity">
+            {% elif aircraft.id == 4  %}
+                <img src="https://vignette.wikia.nocookie.net/acecombat/images/6/66/Su-25TM_Rear.jpg/revision/latest?cb=20111001044842" alt="House" style="width:100%" class="w3-hover-opacity">
+            {% elif aircraft.id == 5  %}
+                <img src="http://imgproc.airliners.net/photos/airliners/5/9/4/2106495.jpg?v=v40" alt="House" style="width:100%" class="w3-hover-opacity">
+            {% else %}
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/AC-130H_Spectre_%282152981898%29.jpg" alt="House" style="width:100%" class="w3-hover-opacity">
+            {% endif %}
         </div>
       <div class="w3-container w3-white">
-        <p><b>A-37 Dragonfly</b></p>
+        <p><b>{{ aircraft.name }}</b></p>
+          <button class="w3-button w3-black" onclick="window.location.href='{% url 'craft_vote' id=aircraft.id %}'">vote</button>
         <p>
         제원<br>
         승무원 : 2명 (병렬좌석)<br>
@@ -55,118 +68,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </p>
       </div>
     </div>
-    <div class="w3-third w3-container w3-margin-bottom">
-        <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">투표수: 999</div>
-            <img src="http://cfile7.uf.tistory.com/image/996129335A0D35061EECD0" alt="House" style="width:100%" class="w3-hover-opacity">
-        </div>
-        <div class="w3-container w3-white">
-            <p><b>F-14 Tomcat</b></p>
-            <p>
-            제원<br>
-            형식명: F-14A/B/D<br>
-            분류: 쌍발 터보팬 함재 제공전투기/다목적 전투기(F-14D)<br>
-            임무: 공중 우세 확보 및 함대 방공, 지상 공격(F-14D)<br>
-            제작: 그루먼 사<br>
-            승무원: 2명 (파일럿+전자전 사관)<br>
-            전장: 18.6m<br>
-            날개길이: 19.55M(완전히 폈을때), 11.58M(완전히 접었을때)<br>
-            자체 중량:18,190kg<br>
-            최대 이륙중량: 33,724kg<br>
-            최대 무장탑재량: 6,577kg<br>
-            전투반경: 927km<br>
-            항속거리: 4,500km<br>
-            무장: 피닉스, 스패로우, 사이드와인더, JDAM, 페이브웨이 시리즈 폭탄, 마크 80시리즈 항공폭탄, 마크 20 록아이 2 폭탄<br>
-            </p>
-        </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom">
-        <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">투표수: 999</div>
-            <img src="http://luxurylivingmag.com/wp-content/uploads/2016/08/photo-1.php_-726x400.jpeg" alt="House" style="width:100%" class="w3-hover-opacity">
-        </div>
-        <div class="w3-container w3-white">
-            <p><b>Beechcraft Super King Air</b></p>
-            <p>
-            제원<br>
-            비행 거리: 3,338km<br>
-            길이: 13m<br>
-            운행 시작: 1972년<br>
-            단가: 5,240,000–7,570,000 USD (2009년)<br>
-            엔진 유형: 터보프롭<br>
-            제작업체: 비치크래프트<br>
-            </p>
-        </div>
-    </div>
+      {% if aircraft.id == 3  %}
   </div>
-
-  <!-- Second Photo Grid-->
   <div class="w3-row-padding">
-    <div class="w3-third w3-container w3-margin-bottom">
-        <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">투표수: 999</div>
-            <img src="https://vignette.wikia.nocookie.net/acecombat/images/6/66/Su-25TM_Rear.jpg/revision/latest?cb=20111001044842" alt="House" style="width:100%" class="w3-hover-opacity">
-        </div>
-        <div class="w3-container w3-white">
-            <p><b>Su-25TM</b></p>
-            <p>
-            제원<br>
-            승무원: 1명<br>
-            길이: 15.53 m (50 ft 11.5 in)<br>
-            날개폭: 14.36 m (47 ft 1.5 in)<br>
-            길이: 4.80 m (15 ft 9 in)<br>
-            날개면적: 33.7 m² (323 ft²)<br>
-            기체중량: 9,800 kg (21,605 lb)<br>
-            탑재중량: 14,440 kg (31,835 lb) (보통의 이륙중량)<br>
-            최대이륙중량: 19,300 kg (42,549 lb)<br>
-            엔진: 2 × Soyuz/Gavrilov R-195 turbojets, 44.18 kN (9,921 lbf) 각각<br>
-            </p>
-        </div>
-    </div>
-
-    <div class="w3-third w3-container w3-margin-bottom">
-        <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">투표수: 999</div>
-            <img src="http://imgproc.airliners.net/photos/airliners/5/9/4/2106495.jpg?v=v40" alt="House" style="width:100%" class="w3-hover-opacity">
-        </div>
-        <div class="w3-container w3-white">
-            <p><b>A-10C</b></p>
-            <p>
-            제원<br>
-            승무원: 1<br>
-            길이: 53 ft 4 인치 (16.26 m)<br>
-            날개폭: 57 ft 6 인치 (17.53 m)<br>
-            높이: 14 ft 8 인치 (4.47 m)<br>
-            날개면적: 506 ft² (47.0 m²)<br>
-            날개꼴: NACA 6716 root, NACA 6713 tip<br>
-            공허중량: 24,959 파운드 (11,321 kg)<br>
-            탑재중량:<br>
-            Standard: 30,384 파운드 (13,782 kg)<br>
-            On CAS mission: 47,094 파운드 (21,361 kg)<br>
-            On anti-armor mission: 42,071 파운드 (19,083 kg)<br>
-            최대이륙중량: 50,000 파운드 (23,000 kg)<br>
-            </p>
-        </div>
-    </div>
-
-    <div class="w3-third w3-container w3-margin-bottom">
-        <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">투표수: 999</div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/AC-130H_Spectre_%282152981898%29.jpg" alt="House" style="width:100%" class="w3-hover-opacity">
-        </div>
-        <div class="w3-container w3-white">
-            <p><b>AC-130H</b></p>
-            <p>
-            제원<br>
-            날개폭: 40m<br>
-            최고 속도: 482km/h<br>
-            비행 거리: 4,070km<br>
-            길이: 30m<br>
-            엔진 유형: Allison T56<br>
-            </p>
-        </div>
-    </div>
-
+      {% endif %}
+      {% endfor %}
   </div>
 
   <!-- Pagination -->

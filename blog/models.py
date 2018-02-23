@@ -22,7 +22,7 @@ class Post(models.Model):
 class AirCraft(models.Model):
     name = models.CharField(max_length=200)
     vote = models.IntegerField(default=0)
-    explanation = models.TextField()
+    explanation = models.TextField(default="")
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(
