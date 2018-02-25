@@ -16,4 +16,4 @@ def craft_vote(request, id):
     craft = AirCraft.objects.get(id=id)
     craft.vote = craft.vote + 1
     craft.save()
-    return render(request, 'blog/craft_vote.html', {})
+    return render(request, 'blog/craft_vote.html', {'vote': craft.vote})
