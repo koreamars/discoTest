@@ -36,37 +36,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <div class="w3-third w3-container w3-margin-bottom">
         <div class="w3-display-container">
             <div class="w3-display-topleft w3-black w3-padding">투표수: <b id="votevalue{{ aircraft.id }}">{{ aircraft.vote }}</b></div>
-            {% if aircraft.id == 1 %}
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/OA-37B-1_%28centered%29.jpg/300px-OA-37B-1_%28centered%29.jpg" alt="House" style="width:100%" class="w3-hover-opacity">
-            {% elif aircraft.id == 2  %}
-                <img src="http://cfile7.uf.tistory.com/image/996129335A0D35061EECD0" alt="House" style="width:100%" class="w3-hover-opacity">
-            {% elif aircraft.id == 3  %}
-                <img src="http://luxurylivingmag.com/wp-content/uploads/2016/08/photo-1.php_-726x400.jpeg" alt="House" style="width:100%" class="w3-hover-opacity">
-            {% elif aircraft.id == 4  %}
-                <img src="https://vignette.wikia.nocookie.net/acecombat/images/6/66/Su-25TM_Rear.jpg/revision/latest?cb=20111001044842" alt="House" style="width:100%" class="w3-hover-opacity">
-            {% elif aircraft.id == 5  %}
-                <img src="http://imgproc.airliners.net/photos/airliners/5/9/4/2106495.jpg?v=v40" alt="House" style="width:100%" class="w3-hover-opacity">
-            {% else %}
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/AC-130H_Spectre_%282152981898%29.jpg" alt="House" style="width:100%" class="w3-hover-opacity">
-            {% endif %}
+            <img src="{{ aircraft.thumnail }}" alt="House" style="width:100%" class="w3-hover-opacity">
         </div>
       <div class="w3-container w3-white">
-        <p><b>{{ aircraft.name }}</b></p>
+        <p><b>{{ aircraft.model }}({{ aircraft.name }})</b></p>
           <!--button class="w3-button w3-black" onclick="window.location.href='{% url 'craft_vote' id=aircraft.id %}'">vote</button-->
           <button class="w3-button w3-black" id="execute{{ aircraft.id }}" value="execute">vote</button>
         <p>
         제원<br>
-        승무원 : 2명 (병렬좌석)<br>
-        전폭 : 10.93m<br>
-        전장 : 8.93m<br>
-        자체중량 : 2,871kg<br>
-        최대이륙중량 : 6.8톤<br>
-        엔진 : 제너럴 일렉트릭 J85-GE-17A 터보젯 엔진 2기(애프터 버너 생략)<br>
-        최대속도 : 815Km/h<br>
-        실용상승한도 : 12.720m<br>
-        고정무장 : GAU-2B/A 7.62mm미니건 1정 (1,500발)<br>
-        최대 무장능력 : 각종 폭탄과 로켓탄을 2.5톤까지 탑재가능<br>
-        전투행동반경 : 최대장비 시 740Km
+        승무원 : {{ aircraft.boarding }}명<br>
+        최대이륙중량 : {{ aircraft.takeoffWeight }} kg<br>
+        최대속도 : {{ aircraft.maxSpeed }}Km/h<br>
+            무장1 : {{ aircraft.ammoname1 }}<br>
+            무장2 : {{ aircraft.ammoname2 }}<br>
+            무장3 : {{ aircraft.ammoname3 }}<br>
+        전투행동반경 : {{ aircraft.combatRadius }}Km
         </p>
       </div>
 <script>
@@ -89,19 +73,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       {% endfor %}
   </div>
 
-  <!-- Pagination -->
-  <div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-    </div>
+  <div class="w3-black w3-center w3-padding-24">
+      <button class="w3-button w3-white w3-hide-small" onclick="window.location.href='{% url 'insert_data' type='aircraft' %}'"><i class="fa fa-fighter-jet w3-margin-right"></i>Insert Craft</button>
+      <button class="w3-button w3-white w3-hide-small" onclick="window.location.href='{% url 'insert_data' type='ammo' %}'"><i class="fa fa-plane w3-margin-right"></i>Insert Ammo</button>
   </div>
-
-  <div class="w3-black w3-center w3-padding-24">Feel !!!</div>
 
 <!-- End page content -->
 </div>

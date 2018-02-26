@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Insert</title>
+</head>
+<body>
+{% if type == 'aircraft' %}
+    aircraft insert.<br>
+    <form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">save</button>
+    </form>
+{% elif type == "ammo" %}
+    ammo insert.<br>
+    <form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">save</button>
+    </form>
+{% else %}
+    error.
+{% endif %}
+</body>
+</html>
