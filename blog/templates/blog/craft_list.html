@@ -73,6 +73,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       {% endfor %}
   </div>
 
+<div id="map" style="width:100%;height:400px;"></div>
+<p><em>지도를 클릭해주세요!</em></p>
+<div id="clickLatlng"></div>
+
   <div class="w3-black w3-center w3-padding-24">
       <button class="w3-button w3-white w3-hide-small" onclick="window.location.href='{% url 'insert_data' type='aircraft' %}'"><i class="fa fa-fighter-jet w3-margin-right"></i>Insert Craft</button>
       <button class="w3-button w3-white w3-hide-small" onclick="window.location.href='{% url 'insert_data' type='ammo' %}'"><i class="fa fa-plane w3-margin-right"></i>Insert Ammo</button>
@@ -80,7 +84,89 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
 <!-- End page content -->
 </div>
+<style>
+.label {margin-bottom: 96px;}
+.label * {display: inline-block;vertical-align: top;}
+.label .left {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24px;overflow: hidden;vertical-align: top;width: 7px;}
+.label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
+.label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
 
+    .balloon {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        display: inline-block;
+        position: relative;
+        background: #fff;
+        margin: 0 auto 10px;
+        border-radius: 20px;
+        padding:0.2em;
+        cursor: pointer;
+    }
+    .balloon:after {
+        top: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+
+        border-color: rgba(136, 183, 213, 0);
+        border-top-color: #ffffff;
+        border-width: 7px;
+        margin-left: -7px;
+    }
+
+    .balloon:before {
+        content: '';
+        position: absolute;
+        background: #f00;
+        height: 14px;
+        width: 14px;
+        border-radius: 10px;
+        bottom: -15px;
+        left: 50%;
+        margin-left: -7px;
+        border: 2px solid #ffffff;
+    }
+
+
+    .label1 {
+        color:#595959;
+    }
+</style>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f4f4759f8d3186fb1f11b036ecbbe0f6"></script>
+<script>
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+        center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+    // 커스텀 오버레이에 표시할 내용입니다
+    // HTML 문자열 또는 Dom Element 입니다
+    var content = '<div class ="balloon" onclick="overlayClick()"><span class="center">&nbsp&nbsp;<span class="label1">실</span> <b>1.29억</b><span class="label1">|49m<sup>2</sup></span>&nbsp;&nbsp</span></div>';
+
+    // 커스텀 오버레이가 표시될 위치입니다
+    var position = new daum.maps.LatLng(33.450701, 126.570667);
+
+    // 커스텀 오버레이를 생성합니다
+    var customOverlay = new daum.maps.CustomOverlay({
+        position: position,
+        content: content
+    });
+
+    // 커스텀 오버레이를 지도에 표시합니다
+    customOverlay.setMap(map);
+
+    function overlayClick() {
+        alert("푸하하하하!!!");
+    }
+
+</script>
 <script>
 // Script to open and close sidebar
 function w3_open() {
@@ -92,6 +178,7 @@ function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
 }
+
 </script>
 
 </body>
